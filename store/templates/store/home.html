@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="home-container">
+    
+    <!-- Kategori Filtreleri -->
+    <div class="categories">
+        <a href="{% url 'store:home' %}" class="category-btn">Tümü</a>
+        {% for category in categories %}
+            <a href="{% url 'store:category' category.slug %}" class="category-btn">{{ category.name }}</a>
+        {% endfor %}
+    </div>
+
+    <!-- Ürün Grid -->
+    <div class="product-grid">
+        {% for product in products %}
+            <div class="product-card">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                    <div class="no-image">Görsel Yok</div>
+                {% endif %}
+                <div class="product-info">
+                    <p class="product-category">{{ product.category.name }}</p>
+                    <h3 class="product-name">{{ product.name }}</h3>
+                    <p class="product-price">{{ product.price }} ₺</p>
+                    <a href="#" class="btn-detail">İncele</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

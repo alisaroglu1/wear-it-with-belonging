@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+    --bg: #F5F0E8;
+    --ink: #2C1810;
+    --accent: #C4622D;
+    --sage: #8A9E8C;
+    --muted: #9E9688;
+    --border: #D4CFC4;
+    --white: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+}
+
+/* NAVBAR */
+.navbar {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 1.2rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+}
+
+.navbar-links, .navbar-actions {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.navbar-links a, .navbar-actions a {
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+}
+
+.navbar-links a:hover, .navbar-actions a:hover {
+    color: var(--accent);
+}
+
+.navbar-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    transition: color 0.2s;
+}
+
+.navbar-actions button:hover {
+    color: var(--accent);
+}
+
+/* FOOTER */
+.footer {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 2rem;
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+}
+
+.footer-copy {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+}
+
+
+/* HOME */
+.home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+/* Kategori Filtreleri */
+.categories {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.category-btn {
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+}
+
+.category-btn:hover {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+}
+
+/* Ürün Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+/* Ürün Kartı */
+.product-card {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+}
+
+.product-card img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    display: block;
+}
+
+.no-image {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+}
+
+.product-info {
+    padding: 1rem 0;
+}
+
+.product-category {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+}
+
+.product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.product-price {
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+}
+
+.btn-detail {
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.btn-detail:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
