@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="detail-container">
+    
+    <!-- Görsel -->
+    <div class="detail-image">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% else %}
+            <div class="no-image">Görsel Yok</div>
+        {% endif %}
+    </div>
+
+    <!-- Bilgiler -->
+    <div class="detail-info">
+        <p class="product-category">{{ product.category.name }}</p>
+        <h1 class="detail-name">{{ product.name }}</h1>
+        <p class="detail-price">{{ product.price }} ₺</p>
+        <p class="detail-description">{{ product.description }}</p>
+
+        {% if product.stock > 0 %}
+            <form method="POST" action="{% url 'store:add_to_cart' product.pk %}">
+                {% csrf_token %}
+                <div class="quantity-wrapper">
+                    <label>Adet</label>
+                    <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}">
+                </div>
+                <button type="submit" class="btn-add-cart">Sepete Ekle</button>
+            </form>
+        {% else %}
+            <p class="out-of-stock">Stokta Yok</p>
+        {% endif %}
+
+        <p class="stock-info">Stok: {{ product.stock }} adet</p>
+    </div>
+
+</div>
+
+{% endblock %}

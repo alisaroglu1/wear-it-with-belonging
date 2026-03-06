@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="checkout-container">
+
+    <h1 class="cart-title">Siparişi Tamamla</h1>
+
+    <div class="cart-wrapper">
+        
+        <!-- Sipariş Özeti -->
+        <div class="checkout-items">
+            <h2 class="summary-title">Ürünler</h2>
+            {% for item in cart.items.all %}
+                <div class="cart-item">
+                    {% if item.product.image %}
+                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                    {% else %}
+                        <div class="no-image-small">Görsel Yok</div>
+                    {% endif %}
+                    <div class="cart-item-info">
+                        <p class="cart-item-category">{{ item.product.category.name }}</p>
+                        <h3 class="cart-item-name">{{ item.product.name }}</h3>
+                        <p class="cart-item-price">{{ item.product.price }} ₺</p>
+                    </div>
+                    <div class="cart-item-actions">
+                        <p class="cart-item-quantity">{{ item.quantity }} adet</p>
+                        <p class="cart-item-subtotal">{{ item.subtotal }} ₺</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Ödeme -->
+        <div class="cart-summary">
+            <h2 class="summary-title">Ödeme</h2>
+            <div class="summary-row">
+                <span>Ara Toplam</span>
+                <span>{{ cart.total }} ₺</span>
+            </div>
+            <div class="summary-row">
+                <span>Kargo</span>
+                <span>Ücretsiz</span>
+            </div>
+            <div class="summary-row total">
+                <span>Toplam</span>
+                <span>{{ cart.total }} ₺</span>
+            </div>
+
+            <div id="payment-error" style="display:none; background:#fff0ed; border:1px solid #C4622D; padding:0.75rem 1rem; margin-bottom:1rem; font-size:0.8rem; color:#C4622D; letter-spacing:0.05em;">
+                Lütfen tüm kart bilgilerini eksiksiz doldurun.
+            </div>
+
+            <form id="payment-form" method="POST" action="{% url 'store:checkout' %}">
+    {% csrf_token %}
+    
+    <div class="payment-fields">
+        <div class="field-group">
+            <label>Kart Üzerindeki İsim</label>
+            <input type="text" placeholder="Ad Soyad">
+        </div>
+        <div class="field-group">
+            <label>Kart Numarası</label>
+            <input type="text" placeholder="0000 0000 0000 0000" maxlength="19">
+        </div>
+        <div class="payment-row">
+            <div class="field-group">
+                <label>Son Kullanma</label>
+                <input type="text" placeholder="MM/YY" maxlength="5">
+            </div>
+            <div class="field-group">
+                <label>CVV</label>
+                <input type="text" placeholder="000" maxlength="3">
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" style="width:100%; padding:1rem; background:#2C1810; color:#F5F0E8; border:none; cursor:pointer; font-size:0.85rem; letter-spacing:0.15em; text-transform:uppercase; margin-top:1.5rem;">
+        Siparişi Onayla
+    </button>
+</form>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+

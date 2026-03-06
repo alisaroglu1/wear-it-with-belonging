@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="cart-container">
+
+    <h1 class="cart-title">Sepetim</h1>
+
+    {% if cart.items.all %}
+        <div class="cart-wrapper">
+            
+            <!-- Ürünler -->
+            <div class="cart-items">
+                {% for item in cart.items.all %}
+                    <div class="cart-item">
+                        {% if item.product.image %}
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                        {% else %}
+                            <div class="no-image-small">Görsel Yok</div>
+                        {% endif %}
+                        
+                        <div class="cart-item-info">
+                            <p class="cart-item-category">{{ item.product.category.name }}</p>
+                            <h3 class="cart-item-name">{{ item.product.name }}</h3>
+                            <p class="cart-item-price">{{ item.product.price }} ₺</p>
+                        </div>
+
+                        <div class="cart-item-actions">
+                            <p class="cart-item-quantity">{{ item.quantity }} adet</p>
+                            <p class="cart-item-subtotal">{{ item.subtotal }} ₺</p>
+                            <form method="POST" action="{% url 'store:remove_from_cart' item.pk %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn-remove">Kaldır</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Özet -->
+            <div class="cart-summary">
+                <h2 class="summary-title">Sipariş Özeti</h2>
+                <div class="summary-row">
+                    <span>Ara Toplam</span>
+                    <span>{{ cart.total }} ₺</span>
+                </div>
+                <div class="summary-row">
+                    <span>Kargo</span>
+                    <span>Ücretsiz</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Toplam</span>
+                    <span>{{ cart.total }} ₺</span>
+                </div>
+                <a href="{% url 'store:checkout' %}" class="btn-checkout">Siparişi Tamamla</a>
+            </div>
+
+        </div>
+    {% else %}
+        <div class="cart-empty">
+            <p>Sepetiniz boş.</p>
+            <a href="{% url 'store:home' %}" class="btn-detail">Alışverişe Başla</a>
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="confirm-container">
+
+    <div class="confirm-card">
+        <div class="confirm-icon">✓</div>
+        <h1 class="confirm-title">Siparişiniz Alındı!</h1>
+        <p class="confirm-subtitle">Sipariş #{{ order.id }}</p>
+
+        <div class="confirm-items">
+            {% for item in order.items.all %}
+                <div class="confirm-item">
+                    <span>{{ item.product.name }} × {{ item.quantity }}</span>
+                    <span>{{ item.subtotal }} ₺</span>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="confirm-total">
+            <span>Toplam</span>
+            <span>{{ order.total_price }} ₺</span>
+        </div>
+
+        <a href="{% url 'store:home' %}" class="btn-checkout">Alışverişe Devam Et</a>
+    </div>
+
+</div>
+
+{% endblock %}

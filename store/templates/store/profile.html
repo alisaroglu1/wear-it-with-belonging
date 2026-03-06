@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="profile-wrapper">
+    <div class="profile-container">
+
+        <h1 class="profile-title">Hesabım</h1>
+
+        <div class="profile-grid">
+
+            <!-- Sol: Profil Bilgileri -->
+            <div class="profile-left">
+
+                <div class="profile-card">
+                    <div class="profile-avatar">{{ request.user.username|first|upper }}</div>
+                    <h2 class="profile-username">{{ request.user.username }}</h2>
+                    <p class="profile-email">{{ request.user.email }}</p>
+                </div>
+
+                <!-- Adres Formu -->
+                <div class="profile-section">
+                    <h3 class="section-title">Adres Bilgileri</h3>
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="field-group">
+                            <label>Telefon</label>
+                            <input type="text" name="phone" value="{{ profile.phone }}" placeholder="05XX XXX XX XX">
+                        </div>
+
+                        <div class="field-group">
+                            <label>Adres</label>
+                            <textarea name="address" placeholder="Mahalle, sokak, bina no...">{{ profile.address }}</textarea>
+                        </div>
+
+                        <div class="profile-row">
+                            <div class="field-group">
+                                <label>Şehir</label>
+                                <input type="text" name="city" value="{{ profile.city }}" placeholder="İstanbul">
+                            </div>
+                            <div class="field-group">
+                                <label>İlçe</label>
+                                <input type="text" name="district" value="{{ profile.district }}" placeholder="Kadıköy">
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label>Posta Kodu</label>
+                            <input type="text" name="zip_code" value="{{ profile.zip_code }}" placeholder="34000">
+                        </div>
+
+                        <button type="submit" class="btn-auth">Kaydet</button>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- Sağ: Siparişler -->
+            <div class="profile-right">
+                <h3 class="section-title">Siparişlerim</h3>
+
+                {% if orders %}
+                    {% for order in orders %}
+                        <div class="order-card">
+                            <div class="order-header">
+                                <span class="order-id">Sipariş #{{ order.id }}</span>
+                                <span class="order-status status-{{ order.status }}">{{ order.get_status_display }}</span>
+                            </div>
+                            <div class="order-items">
+                                {% for item in order.items.all %}
+                                    <p class="order-item">{{ item.product.name }} × {{ item.quantity }}</p>
+                                {% endfor %}
+                            </div>
+                            <div class="order-footer">
+                                <span class="order-date">{{ order.created_at|date:"d M Y" }}</span>
+                                <span class="order-total">{{ order.total_price }} ₺</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-state">
+                        <p>Henüz siparişiniz yok.</p>
+                        <a href="{% url 'store:home' %}" class="btn-detail">Alışverişe Başla</a>
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -15,23 +15,23 @@
         <a href="/" class="navbar-brand">Wear it with Belonging</a>
 
         <ul class="navbar-links">
-            <li><a href="/">Ana Sayfa</a></li>
+            <li><a href=" ">Ana Sayfa</a></li>
             <li><a href="#">Kategoriler</a></li>
         </ul>
 
         <ul class="navbar-actions">
-            <li><a href="#">🛒 Sepet</a></li>
+            <li><a href="{% url 'store:cart_detail' %}">🛒 Sepet</a></li>
             {% if user.is_authenticated %}
-                <li><a href="#">Profil</a></li>
+                <li><a href="{% url 'store:profile' %}">Profil</a></li>
                 <li>
-                    <form method="POST" action="#">
+                    <form method="POST" action="{% url 'account_logout' %}">
                         {% csrf_token %}
                         <button type="submit">Çıkış</button>
                     </form>
                 </li>
             {% else %}
-                <li><a href="#">Giriş Yap</a></li>
-                <li><a href="#">Kayıt Ol</a></li>
+                <li><a href="{% url 'account_login' %}">Giriş Yap</a></li>
+                <li><a href="{% url 'account_signup' %}">Kayıt Ol</a></li>
             {% endif %}
         </ul>
 
@@ -49,6 +49,7 @@
         <p class="footer-copy">© 2026 — Tüm hakları saklıdır.</p>
     </div>
 </footer>
-
+    {% block scripts %}
+    {% endblock %}
 </body>
 </html>

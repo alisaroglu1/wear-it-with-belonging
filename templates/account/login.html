@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        
+        <div class="auth-header">
+            <h1>Hoş Geldiniz</h1>
+            <p>Hesabınıza giriş yapın</p>
+        </div>
+
+        <form method="POST" action="{% url 'account_login' %}">
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div class="auth-error">
+                    Kullanıcı adı veya şifre hatalı.
+                </div>
+            {% endif %}
+
+            <div class="field-group">
+                <label>Kullanıcı Adı / E-posta</label>
+                <input type="text" name="login" placeholder="kullanıcı adı veya e-posta">
+            </div>
+
+            <div class="field-group">
+                <label>Şifre</label>
+                <input type="password" name="password" placeholder="••••••••">
+            </div>
+
+            <button type="submit" class="btn-auth">Giriş Yap</button>
+        </form>
+
+        <p class="auth-switch">
+            Hesabın yok mu? <a href="{% url 'account_signup' %}">Kayıt Ol</a>
+        </p>
+
+    </div>
+</div>
+
+{% endblock %}
