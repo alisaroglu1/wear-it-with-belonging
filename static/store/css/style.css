@@ -905,3 +905,466 @@ h1, h2, h3, h4 {
     font-weight: 500;
     color: var(--accent);
 }
+
+/* KATEGORİ LİSTESİ */
+.category-list-wrapper {
+    padding: 3rem 2rem;
+}
+
+.category-list-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.category-list-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.category-list-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.category-list-header p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.category-card {
+    text-decoration: none;
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    display: block;
+}
+
+.category-card:hover {
+    border-color: var(--ink);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.category-card h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+}
+
+.category-card span {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.category-card:hover h2 {
+    color: var(--accent);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* DASHBOARD */
+.dash-wrapper {
+    padding: 3rem 2rem;
+}
+
+.dash-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dash-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.dash-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+}
+
+.dash-header p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+}
+
+/* İstatistik Kartları */
+.dash-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.stat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    transition: border-color 0.2s;
+}
+
+.stat-card:hover {
+    border-color: var(--ink);
+}
+
+.stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+}
+
+.stat-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+/* Grid */
+.dash-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.dash-grid .dash-section:first-child {
+    grid-column: 1 / -1;
+}
+
+.dash-section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 1.8rem;
+}
+
+.dash-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Tablo */
+.dash-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.dash-table th {
+    text-align: left;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 0 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.dash-table td {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink);
+}
+
+.dash-table tr:last-child td {
+    border-bottom: none;
+}
+
+.empty-row {
+    color: var(--muted);
+    font-style: italic;
+    text-align: center;
+    padding: 1.5rem 0 !important;
+}
+
+.stock-low {
+    color: #b8860b;
+    font-weight: 500;
+}
+
+.stock-empty {
+    color: var(--accent);
+    font-weight: 500;
+}
+
+/* DASHBOARD SIDEBAR */
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: calc(100vh - 60px);
+}
+
+.dash-sidebar {
+    background: var(--white);
+    border-right: 1px solid var(--border);
+    padding: 2rem 0;
+}
+
+.dash-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.dash-nav-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 1.2rem 1.5rem 0.4rem;
+}
+
+.dash-nav-link {
+    font-size: 0.85rem;
+    color: var(--ink);
+    padding: 0.6rem 1.5rem;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+}
+
+.dash-nav-link:hover {
+    background: var(--bg);
+    color: var(--accent);
+}
+
+.dash-nav-link.active {
+    background: var(--bg);
+    color: var(--accent);
+    border-left: 2px solid var(--accent);
+}
+
+.dash-main {
+    padding: 2.5rem;
+    background: var(--bg);
+}
+
+/* Sil butonu */
+.btn-remove {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: none;
+    border: 1px solid var(--accent);
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-remove:hover {
+    background: var(--accent);
+    color: var(--white);
+}
+
+    /* ARAMA */
+.search-wrapper {
+    margin: 0 0 2rem 0;
+    padding: 0;
+}
+
+.search-box {
+    display: flex;
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    background: var(--white);
+    padding: 0.8rem 1.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--ink);
+    outline: none;
+}
+
+.search-box button {
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.search-box button:hover {
+    background: var(--accent);
+}
+
+
+/* 1. ALTIN KURAL: Dosyanın en üstüne (Media Query dışına) ekle */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    overflow-x: hidden; /* Yatay kaydırmayı kökten yasaklar */
+    width: 100%;
+}
+
+/* 2. RESPONSIVE BLOĞU (768px altı cihazlar için) */
+@media (max-width: 768px) {
+    
+    /* Genel Konteyner Ayarları */
+    .home-container, 
+    .products-wrapper, 
+    .cart-container, 
+    .profile-wrapper, 
+    .dash-main {
+        padding: 1rem;
+        width: 100%;
+    }
+
+    /* Navbar: Mobilde elemanları alt alta ya da esnek diz */
+    .navbar-container {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .navbar-links {
+        display: none; /* Mobilde hamburger menü kullanmıyorsan gizli kalsın */
+    }
+
+    /* Arama Çubuğu: O patlayan kısmı tamir eden yer burası */
+    .search-wrapper {
+        width: 100%;
+    }
+
+    .search-box {
+        display: flex;
+        width: 100%;
+    }
+
+    .search-box input {
+        flex: 1;
+        min-width: 0; /* Taşmayı önleyen sihirli kod */
+        padding: 0.8rem;
+    }
+
+    .search-box button {
+        padding: 0 1.2rem;
+        white-space: nowrap;
+    }
+
+    /* Kategoriler: Yan yana kaydırılabilir (Scrollable) veya Wrap */
+    .categories {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+
+    .categories a {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+    }
+
+    /* Ürün Grid: Mobilde yan yana 2 tane en ideali */
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 sütun yap */
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .product-card {
+        width: 100%;
+    }
+
+    .product-card img {
+        aspect-ratio: 1/1; /* Kare resimler mobilde daha düzenli durur */
+        object-fit: cover;
+    }
+
+    /* Sepet ve Ödeme: Alt alta dizilim */
+    .cart-wrapper, 
+    .product-detail-wrapper, 
+    .payment-row {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .cart-summary {
+        width: 100%;
+        position: static; /* Mobilde yapışkan olmasın, en alta düşsün */
+    }
+
+    /* Profil ve Dashboard */
+    .profile-grid, 
+    .dashboard-layout {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dash-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 1rem;
+    }
+
+    /* Tabloyu Mobilde Karta Çevirme (Okunabilirlik için) */
+    .dash-table thead {
+        display: none; /* Başlıkları gizle */
+    }
+
+    .dash-table, .dash-table tbody, .dash-table tr, .dash-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .dash-table tr {
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        padding: 0.5rem;
+        border-radius: 8px;
+    }
+
+    .dash-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    /* Form Elemanları */
+    input, select, textarea {
+        font-size: 16px !important; /* iPhone'larda zoom yapmasını engeller */
+        width: 100%;
+    }
+}

@@ -4,13 +4,18 @@ from django.contrib.auth.decorators import login_required
 
 
 def home(request):
+    query = request.GET.get('q', '')
     products = Product.objects.filter(is_active=True)
+    
+    if query:
+        products = products.filter(name__icontains=query)
+    
     categories = Category.objects.all()
     return render(request, 'store/home.html', {
         'products': products,
-        'categories': categories
+        'categories': categories,
+        'query': query
     })
-
 
 def category(request, slug):
     category = Category.objects.get(slug=slug)
@@ -59,13 +64,11 @@ def checkout(request):
     cart = Cart.objects.get(user=request.user)
     
     if request.method == 'POST':
-        # Sipariş oluştur
         order = Order.objects.create(
             user=request.user,
             total_price=cart.total()
         )
         
-        # Sepetteki her ürünü OrderItem olarak kaydet
         for item in cart.items.all():
             OrderItem.objects.create(
                 order=order,
@@ -73,13 +76,16 @@ def checkout(request):
                 quantity=item.quantity,
                 price=item.product.price
             )
+            item.product.stock -= item.quantity
+            item.product.save()
         
-        # Sepeti temizle
         cart.items.all().delete()
-        
         return redirect('store:order_confirm', pk=order.pk)
     
     return render(request, 'store/checkout.html', {'cart': cart})
+
+
+
 
 
 @login_required
@@ -106,4 +112,10 @@ def profile(request):
     return render(request, 'store/profile.html', {
         'profile': profile,
         'orders': orders
+    })
+
+def category_list(request):
+    categories = Category.objects.all()
+    return render(request, 'store/category_list.html', {
+        'categories': categories
     })

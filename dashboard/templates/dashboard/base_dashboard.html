@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="dashboard-layout">
+
+    <!-- Sidebar -->
+    <aside class="dash-sidebar">
+        <nav class="dash-nav">
+            <p class="dash-nav-label">Genel</p>
+            <a href="{% url 'dashboard:home' %}" class="dash-nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                Genel Bakış
+            </a>
+
+            <p class="dash-nav-label">Ürünler</p>
+            <a href="{% url 'dashboard:product_list' %}" class="dash-nav-link {% if request.resolver_match.url_name == 'product_list' %}active{% endif %}">
+                Ürün Listesi
+            </a>
+            <a href="{% url 'dashboard:product_add' %}" class="dash-nav-link {% if request.resolver_match.url_name == 'product_add' %}active{% endif %}">
+                Yeni Ürün Ekle
+            </a>
+
+            <p class="dash-nav-label">Kategoriler</p>
+            <a href="{% url 'dashboard:category_list' %}" class="dash-nav-link {% if request.resolver_match.url_name == 'category_list' %}active{% endif %}">
+                Kategori Listesi
+            </a>
+            <a href="{% url 'dashboard:category_add' %}" class="dash-nav-link {% if request.resolver_match.url_name == 'category_add' %}active{% endif %}">
+                Yeni Kategori Ekle
+            </a>
+
+            <p class="dash-nav-label">Siparişler</p>
+            <a href="{% url 'dashboard:order_list' %}" class="dash-nav-link {% if request.resolver_match.url_name == 'order_list' %}active{% endif %}">
+                Sipariş Listesi
+            </a>
+        </nav>
+    </aside>
+
+    <!-- İçerik -->
+    <main class="dash-main">
+        {% block dash_content %}
+        {% endblock %}
+    </main>
+
+</div>
+
+{% endblock %}

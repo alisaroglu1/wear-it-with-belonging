@@ -1,0 +1,62 @@
+{% extends "dashboard/base_dashboard.html" %}
+{% load static %}
+
+{% block dash_content %}
+
+<div class="dash-header">
+    <h1>Siparişler</h1>
+    <p>Tüm siparişleri buradan takip edebilirsiniz.</p>
+</div>
+
+<div class="dash-section">
+    <table class="dash-table">
+        <thead>
+            <tr>
+                <th>Sipariş No</th>
+                <th>Kullanıcı</th>
+                <th>Ürünler</th>
+                <th>Toplam</th>
+                <th>Durum</th>
+                <th>Tarih</th>
+                <th>İşlem</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>#{{ order.id }}</td>
+                <td>{{ order.user.username }}</td>
+                <td>
+                    {% for item in order.items.all %}
+                        <p style="font-size:0.8rem; color:var(--muted); margin:0;">{{ item.product.name }} × {{ item.quantity }}</p>
+                    {% endfor %}
+                </td>
+                <td>{{ order.total_price }} ₺</td>
+                <td>
+                    <form method="POST" action="{% url 'dashboard:order_status_update' order.pk %}">
+                        {% csrf_token %}
+                        <select name="status" onchange="this.form.submit()" style="border:1px solid var(--border); background:var(--bg); padding:0.3rem 0.5rem; font-family:'DM Sans',sans-serif; font-size:0.75rem; color:var(--ink); outline:none; cursor:pointer;">
+                            <option value="pending" {% if order.status == 'pending' %}selected{% endif %}>Beklemede</option>
+                            <option value="processing" {% if order.status == 'processing' %}selected{% endif %}>İşleniyor</option>
+                            <option value="shipped" {% if order.status == 'shipped' %}selected{% endif %}>Kargoda</option>
+                            <option value="delivered" {% if order.status == 'delivered' %}selected{% endif %}>Teslim Edildi</option>
+                            <option value="cancelled" {% if order.status == 'cancelled' %}selected{% endif %}>İptal Edildi</option>
+                        </select>
+                    </form>
+                </td>
+                <td>{{ order.created_at|date:"d M Y" }}</td>
+                <td>
+                    <form method="POST" action="{% url 'dashboard:order_delete' order.pk %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-remove" onclick="return confirm('Siparişi silmek istediğinize emin misiniz?')">Sil</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="7" class="empty-row">Henüz sipariş yok.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

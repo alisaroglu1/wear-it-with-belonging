@@ -1,0 +1,104 @@
+{% extends "dashboard/base_dashboard.html" %}
+
+{% block dash_content %}
+
+<div class="dash-header">
+    <h1>Dashboard</h1>
+    <p>Hoş geldin, {{ request.user.username }}</p>
+</div>
+
+<!-- İstatistik Kartları -->
+<div class="dash-stats">
+    <div class="stat-card">
+        <p class="stat-label">Toplam Gelir</p>
+        <h2 class="stat-value">{{ total_revenue }} ₺</h2>
+    </div>
+    <div class="stat-card">
+        <p class="stat-label">Toplam Sipariş</p>
+        <h2 class="stat-value">{{ total_orders }}</h2>
+    </div>
+    <div class="stat-card">
+        <p class="stat-label">Toplam Ürün</p>
+        <h2 class="stat-value">{{ total_products }}</h2>
+    </div>
+</div>
+
+<div class="dash-grid">
+
+    <div class="dash-section">
+        <h3 class="dash-section-title">Son Siparişler</h3>
+        <table class="dash-table">
+            <thead>
+                <tr>
+                    <th>Sipariş</th>
+                    <th>Kullanıcı</th>
+                    <th>Tutar</th>
+                    <th>Durum</th>
+                    <th>Tarih</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in recent_orders %}
+                <tr>
+                    <td>#{{ order.id }}</td>
+                    <td>{{ order.user.username }}</td>
+                    <td>{{ order.total_price }} ₺</td>
+                    <td><span class="order-status status-{{ order.status }}">{{ order.get_status_display }}</span></td>
+                    <td>{{ order.created_at|date:"d M Y" }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5" class="empty-row">Henüz sipariş yok.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="dash-section">
+        <h3 class="dash-section-title">En Çok Satanlar</h3>
+        <table class="dash-table">
+            <thead>
+                <tr>
+                    <th>Ürün</th>
+                    <th>Satış</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in top_products %}
+                <tr>
+                    <td>{{ item.product__name }}</td>
+                    <td>{{ item.total_sold }} adet</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="2" class="empty-row">Henüz satış yok.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="dash-section">
+        <h3 class="dash-section-title">Stok Azalan Ürünler</h3>
+        <table class="dash-table">
+            <thead>
+                <tr>
+                    <th>Ürün</th>
+                    <th>Stok</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in low_stock %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td class="{% if product.stock == 0 %}stock-empty{% else %}stock-low{% endif %}">
+                        {{ product.stock }} adet
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="2" class="empty-row">Stok sorunu yok.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

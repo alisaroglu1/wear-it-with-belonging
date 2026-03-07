@@ -1,0 +1,46 @@
+{% extends "dashboard/base_dashboard.html" %}
+{% load static %}
+
+{% block dash_content %}
+
+<div class="dash-header">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+            <h1>Kategori Yönetimi</h1>
+            <p>Tüm kategorileri buradan yönetebilirsiniz.</p>
+        </div>
+        <a href="{% url 'dashboard:category_add' %}" class="btn-auth" style="width:auto; padding:0.7rem 1.5rem;">+ Yeni Kategori</a>
+    </div>
+</div>
+
+<div class="dash-section">
+    <table class="dash-table">
+        <thead>
+            <tr>
+                <th>Kategori Adı</th>
+                <th>Slug</th>
+                <th>Ürün Sayısı</th>
+                <th>İşlem</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+            <tr>
+                <td>{{ category.name }}</td>
+                <td style="color:var(--muted); font-size:0.82rem;">{{ category.slug }}</td>
+                <td>{{ category.products.count }} ürün</td>
+                <td>
+                    <form method="POST" action="{% url 'dashboard:category_delete' category.pk %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-remove" onclick="return confirm('Kategoriyi silmek istediğinize emin misiniz?')">Sil</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" class="empty-row">Henüz kategori yok.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

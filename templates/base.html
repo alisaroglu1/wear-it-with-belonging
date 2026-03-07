@@ -15,11 +15,14 @@
         <a href="/" class="navbar-brand">Wear it with Belonging</a>
 
         <ul class="navbar-links">
-            <li><a href=" ">Ana Sayfa</a></li>
-            <li><a href="#">Kategoriler</a></li>
+            <li><a href="{% url 'store:home' %}">Ana Sayfa</a></li>
+            <li><a href="{% url 'store:category_list' %}">Kategoriler</a></li>
         </ul>
 
         <ul class="navbar-actions">
+            {% if user.is_staff %}
+    <li><a href="{% url 'dashboard:home' %}">Dashboard</a></li>
+{% endif %}
             <li><a href="{% url 'store:cart_detail' %}">🛒 Sepet</a></li>
             {% if user.is_authenticated %}
                 <li><a href="{% url 'store:profile' %}">Profil</a></li>

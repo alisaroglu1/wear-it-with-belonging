@@ -1,0 +1,69 @@
+{% extends "dashboard/base_dashboard.html" %}
+{% load static %}
+
+{% block dash_content %}
+
+<div class="dash-header">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+            <h1>Ürün Yönetimi</h1>
+            <p>Tüm ürünleri buradan yönetebilirsiniz.</p>
+        </div>
+        <a href="{% url 'dashboard:product_add' %}" class="btn-auth" style="width:auto; padding:0.7rem 1.5rem;">+ Yeni Ürün</a>
+    </div>
+</div>
+
+<div class="dash-section">
+    <table class="dash-table">
+        <thead>
+            <tr>
+                <th>Görsel</th>
+                <th>Ürün Adı</th>
+                <th>Kategori</th>
+                <th>Fiyat</th>
+                <th>Stok</th>
+                <th>Durum</th>
+                <th>İşlem</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" style="width:50px; height:60px; object-fit:cover;">
+                    {% else %}
+                        <div style="width:50px; height:60px; background:var(--border);"></div>
+                    {% endif %}
+                </td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.category.name }}</td>
+                <td>{{ product.price }} ₺</td>
+                <td class="{% if product.stock == 0 %}stock-empty{% elif product.stock <= 5 %}stock-low{% endif %}">
+                    {{ product.stock }}
+                </td>
+                <td>
+                    {% if product.is_active %}
+                        <span style="color:#5a8a5a; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase;">Aktif</span>
+                    {% else %}
+                        <span style="color:var(--accent); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase;">Pasif</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <div style="display:flex; gap:0.5rem;">
+                        <a href="{% url 'dashboard:product_edit' product.pk %}" class="btn-remove" style="color:var(--ink); border-color:var(--ink); text-decoration:none; padding:0.3rem 0.8rem;">Düzenle</a>
+                        <form method="POST" action="{% url 'dashboard:product_delete' product.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-remove" onclick="return confirm('Ürünü silmek istediğinize emin misiniz?')">Sil</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="7" class="empty-row">Henüz ürün yok.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

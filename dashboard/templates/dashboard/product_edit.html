@@ -1,0 +1,67 @@
+{% extends "dashboard/base_dashboard.html" %}
+{% load static %}
+
+{% block dash_content %}
+
+<div class="dash-header">
+    <h1>Ürün Düzenle</h1>
+    <p>{{ product.name }} ürününü düzenliyorsunuz.</p>
+</div>
+
+<div class="dash-section" style="max-width:700px;">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="field-group">
+            <label>Ürün Adı</label>
+            <input type="text" name="name" value="{{ product.name }}" required>
+        </div>
+
+        <div class="field-group">
+            <label>Kategori</label>
+            <select name="category" style="width:100%; border:1px solid var(--border); background:var(--bg); padding:0.75rem 1rem; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:var(--ink); outline:none;">
+                {% for category in categories %}
+                    <option value="{{ category.pk }}" {% if category.pk == product.category.pk %}selected{% endif %}>{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="field-group">
+            <label>Açıklama</label>
+            <textarea name="description" style="width:100%; border:1px solid var(--border); background:var(--bg); padding:0.75rem 1rem; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:var(--ink); outline:none; min-height:100px; resize:vertical; box-sizing:border-box;">{{ product.description }}</textarea>
+        </div>
+
+        <div class="profile-row">
+            <div class="field-group">
+                <label>Fiyat (₺)</label>
+                <input type="number" name="price" value="{{ product.price }}" step="0.01" required>
+            </div>
+            <div class="field-group">
+                <label>Stok</label>
+                <input type="number" name="stock" value="{{ product.stock }}" required>
+            </div>
+        </div>
+
+        <div class="field-group">
+            <label>Görsel</label>
+            {% if product.image %}
+                <img src="{{ product.image.url }}" style="width:80px; height:100px; object-fit:cover; display:block; margin-bottom:0.8rem;">
+            {% endif %}
+            <input type="file" name="image" accept="image/*">
+            <p style="font-size:0.72rem; color:var(--muted); margin-top:0.3rem;">Boş bırakırsanız mevcut görsel korunur.</p>
+        </div>
+
+        <div class="field-group" style="display:flex; align-items:center; gap:0.5rem;">
+            <input type="checkbox" name="is_active" id="is_active" {% if product.is_active %}checked{% endif %} style="width:auto;">
+            <label for="is_active" style="text-transform:none; letter-spacing:0; font-size:0.85rem;">Aktif olarak yayınla</label>
+        </div>
+
+        <div style="display:flex; gap:1rem; margin-top:1rem;">
+            <button type="submit" class="btn-auth" style="width:auto; padding:0.7rem 2rem;">Kaydet</button>
+            <a href="{% url 'dashboard:product_list' %}" style="padding:0.7rem 2rem; border:1px solid var(--border); font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted);">İptal</a>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

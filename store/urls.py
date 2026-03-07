@@ -13,5 +13,6 @@ urlpatterns = [
     path('siparis/', views.checkout, name='checkout'),
     path('siparis/onay/<int:pk>/', views.order_confirm, name='order_confirm'),
     path('profil/', views.profile, name='profile'),
+    path('kategoriler/', views.category_list, name='category_list'),
     
 ]
