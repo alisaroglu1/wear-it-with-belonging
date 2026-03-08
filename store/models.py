@@ -63,9 +63,13 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
-
-    def __str__(self):
-        return f"Order #{self.id} - {self.user}"
+    
+    # Adres bilgileri
+    phone = models.CharField(max_length=15, blank=True)
+    address = models.TextField(blank=True)
+    city = models.CharField(max_length=50, blank=True)
+    district = models.CharField(max_length=50, blank=True)
+    zip_code = models.CharField(max_length=10, blank=True)
 
 
 class OrderItem(models.Model):

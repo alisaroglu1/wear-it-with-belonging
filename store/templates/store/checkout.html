@@ -56,6 +56,37 @@
     {% csrf_token %}
     
     <div class="payment-fields">
+    <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:500; margin-bottom:1.2rem; padding-bottom:0.8rem; border-bottom:1px solid var(--border);">Teslimat Adresi</h3>
+    
+    <div class="field-group">
+        <label>Telefon</label>
+        <input type="text" name="phone" value="{{ profile.phone }}" placeholder="05XX XXX XX XX">
+    </div>
+
+    <div class="field-group">
+        <label>Adres</label>
+        <textarea name="address" placeholder="Mahalle, sokak, bina no...">{{ profile.address }}</textarea>
+    </div>
+
+    <div class="profile-row">
+        <div class="field-group">
+            <label>Şehir</label>
+            <input type="text" name="city" value="{{ profile.city }}" placeholder="İstanbul">
+        </div>
+        <div class="field-group">
+            <label>İlçe</label>
+            <input type="text" name="district" value="{{ profile.district }}" placeholder="Kadıköy">
+        </div>
+    </div>
+
+    <div class="field-group">
+        <label>Posta Kodu</label>
+        <input type="text" name="zip_code" value="{{ profile.zip_code }}" placeholder="34000">
+    </div>
+</div>
+
+    <div class="payment-fields">
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:500; margin-bottom:1.2rem; padding-bottom:0.8rem; border-bottom:1px solid var(--border); margin-top:1.5rem;">Ödeme Bilgileri</h3>
         <div class="field-group">
             <label>Kart Üzerindeki İsim</label>
             <input type="text" placeholder="Ad Soyad">

@@ -63,10 +63,20 @@ def remove_from_cart(request, pk):
 def checkout(request):
     cart = Cart.objects.get(user=request.user)
     
+    if not cart.items.exists():
+        return redirect('store:cart_detail')
+    
+    profile, created = Profile.objects.get_or_create(user=request.user)
+    
     if request.method == 'POST':
         order = Order.objects.create(
             user=request.user,
-            total_price=cart.total()
+            total_price=cart.total(),
+            phone=request.POST.get('phone', ''),
+            address=request.POST.get('address', ''),
+            city=request.POST.get('city', ''),
+            district=request.POST.get('district', ''),
+            zip_code=request.POST.get('zip_code', ''),
         )
         
         for item in cart.items.all():
@@ -82,9 +92,10 @@ def checkout(request):
         cart.items.all().delete()
         return redirect('store:order_confirm', pk=order.pk)
     
-    return render(request, 'store/checkout.html', {'cart': cart})
-
-
+    return render(request, 'store/checkout.html', {
+        'cart': cart,
+        'profile': profile
+    })
 
 
 
