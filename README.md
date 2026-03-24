@@ -119,6 +119,17 @@ Custom CSS design system with:
 **Ali Saroğlu** — YBS Student  
 Built as a learning project to master Django and web development.
 
+<img width="1919" height="870" alt="Ekran görüntüsü 2026-03-24 101517" src="https://github.com/user-attachments/assets/8ece2c19-e586-40e9-8b23-44dcce6cab6a" />
+
+<img width="1894" height="833" alt="Ekran görüntüsü 2026-03-24 101528" src="https://github.com/user-attachments/assets/7cbc74f1-374e-4444-9955-a00eeece7661" />
+<img width="1881" height="862" alt="Ekran görüntüsü 2026-03-24 101539" src="https://github.com/user-attachments/assets/b41bdf42-1cfb-4093-b494-66a2a27aa241" />
+
+<img width="1885" height="848" alt="Ekran görüntüsü 2026-03-24 101547" src="https://github.com/user-attachments/assets/945563bc-afb5-45db-bee6-783b2d9402fa" />
+
+
+<img width="1896" height="858" alt="Ekran görüntüsü 2026-03-24 101624" src="https://github.com/user-attachments/assets/f57a18e8-5dd5-4dcf-a975-9764b8ae132f" />
+
+
 ---
 
 *This project is for educational purposes.*
